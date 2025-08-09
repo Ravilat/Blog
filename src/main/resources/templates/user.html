@@ -1,0 +1,153 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title th:text="${user.login}">Пост</title>-->
+<!--    <script>-->
+<!--        function showEmailForm() {-->
+<!--            document.getElementById('change-email-form').style.display = 'inline';-->
+<!--            document.getElementById('change-email-button').style.display = 'none';-->
+<!--        }-->
+
+<!--        function showChangePassForm() {-->
+<!--            document.getElementById('change-pass-form').style.display = 'inline';-->
+<!--            document.getElementById('change-pass-button').style.display = 'none';-->
+<!--        }-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:replace="~{fragments/header :: body}"></div>-->
+
+<!--<h2>Личный кабинет</h2>-->
+
+<!--<span th:if="${user.isOwner}">-->
+
+<!--    <p>-->
+<!--        Логин: <span th:text="${user.login}"></span>-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--        Email: <span th:text="${user.email}"></span>-->
+<!--        <button type="button" id="change-email-button" onclick="showEmailForm()">Сменить почту</button>-->
+<!--    </p>-->
+
+<!--    <form th:action="@{/user/change-email}" method="post" id="change-email-form" style="display: none;">-->
+<!--        <input type="email" name="newEmail" placeholder="Новая почта" required/>-->
+<!--        <input type="hidden" name="login" th:value="${user.login}"/>-->
+<!--        <input type="hidden" name="postCount" th:value="${user.postCount}"/>-->
+<!--        <input type="hidden" name="commentCount" th:value="${user.commentCount}"/>-->
+<!--        <input type="hidden" name="isOwner" th:value="${user.isOwner}"/>-->
+<!--        <button type="submit">Сохранить</button>-->
+<!--    </form>-->
+
+<!--    <p>-->
+<!--        <button type="button" id="change-pass-button" onclick="showChangePassForm()">Сменить пароль</button>-->
+<!--    </p>-->
+
+<!--        <form th:action="@{/user/change-password}" method="post" id="change-pass-form" style="display: none;">-->
+<!--        <input type="password" name="password" placeholder="Новый пароль" required/>-->
+<!--        <input type="hidden" name="login" th:value="${user.login}"/>-->
+<!--        <input type="hidden" name="postCount" th:value="${user.postCount}"/>-->
+<!--        <input type="hidden" name="commentCount" th:value="${user.commentCount}"/>-->
+<!--        <input type="hidden" name="isOwner" th:value="${user.isOwner}"/>-->
+<!--        <button type="submit">Сохранить</button>-->
+<!--    </form>-->
+
+<!--    <p th:text="'Количество постов: '+${user.postCount}"></p>-->
+<!--    <p th:text="'Количество комментариев: '+${user.commentCount}"></p>-->
+
+<!--</span>-->
+
+
+<!--<span th:unless="${user.isOwner}">-->
+
+<!--    <p th:text="'Логин: '+${user.login}"></p>-->
+<!--    <p th:text="'Email: '+${user.email}"></p>-->
+<!--    <p th:text="'Количество постов: '+${user.postCount}"></p>-->
+<!--    <p th:text="'Количество комментариев: '+${user.commentCount}"></p>-->
+<!--</span>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${user.login}">Профиль пользователя</title>
+    <meta charset="UTF-8" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script>
+        function showEmailForm() {
+            document.getElementById('change-email-form').style.display = 'block';
+            document.getElementById('change-email-button').style.display = 'none';
+        }
+
+        function showChangePassForm() {
+            document.getElementById('change-pass-form').style.display = 'block';
+            document.getElementById('change-pass-button').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: body}"></div>
+
+<main class="container mt-5" style="max-width: 600px;">
+    <h2 class="mb-4">Личный кабинет</h2>
+
+    <div th:if="${user.isOwner}">
+        <div class="mb-3">
+            <label class="form-label"><strong>Логин:</strong></label>
+            <p th:text="${user.login}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><strong>Email:</strong></label>
+            <p class="d-inline" th:text="${user.email}"></p>
+            <button type="button" id="change-email-button" class="btn btn-sm btn-outline-primary ms-3" onclick="showEmailForm()">Сменить почту</button>
+
+            <form th:action="@{/user/change-email}" method="post" id="change-email-form" style="display: none;" class="mt-3">
+                <div class="input-group">
+                    <input type="email" name="newEmail" placeholder="Новая почта" required class="form-control" />
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+                <input type="hidden" name="login" th:value="${user.login}"/>
+                <input type="hidden" name="postCount" th:value="${user.postCount}"/>
+                <input type="hidden" name="commentCount" th:value="${user.commentCount}"/>
+                <input type="hidden" name="isOwner" th:value="${user.isOwner}"/>
+            </form>
+        </div>
+
+        <div class="mb-3">
+            <button type="button" id="change-pass-button" class="btn btn-sm btn-outline-primary" onclick="showChangePassForm()">Сменить пароль</button>
+
+            <form th:action="@{/user/change-password}" method="post" id="change-pass-form" style="display: none;" class="mt-3">
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Новый пароль" required class="form-control" />
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+                <input type="hidden" name="login" th:value="${user.login}"/>
+                <input type="hidden" name="postCount" th:value="${user.postCount}"/>
+                <input type="hidden" name="commentCount" th:value="${user.commentCount}"/>
+                <input type="hidden" name="isOwner" th:value="${user.isOwner}"/>
+            </form>
+        </div>
+
+        <p><strong>Количество постов:</strong> <span th:text="${user.postCount}"></span></p>
+        <p><strong>Количество комментариев:</strong> <span th:text="${user.commentCount}"></span></p>
+    </div>
+
+    <div th:unless="${user.isOwner}">
+        <p><strong>Логин:</strong> <span th:text="${user.login}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+        <p><strong>Количество постов:</strong> <span th:text="${user.postCount}"></span></p>
+        <p><strong>Количество комментариев:</strong> <span th:text="${user.commentCount}"></span></p>
+    </div>
+</main>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
