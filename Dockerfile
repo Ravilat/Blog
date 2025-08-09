@@ -1,11 +1,27 @@
-# Используем официальный образ с JDK 17 от Eclipse Temurin на базе Ubuntu Jammy
+# --- Stage 1: Build stage ---
+FROM maven:3.9.4-eclipse-temurin-17 AS build
+
+# Рабочая директория в контейнере
+WORKDIR /app
+
+# Копируем pom.xml и скачиваем зависимости (кэшируем этот слой)
+COPY pom.xml .
+
+RUN mvn dependency:go-offline
+
+# Копируем исходники
+COPY src ./src
+
+# Собираем проект, пропуская тесты для ускорения (можно убрать -DskipTests, если нужны тесты)
+RUN mvn clean package -DskipTests
+
+# --- Stage 2: Run stage ---
 FROM eclipse-temurin:17-jdk-jammy
 
-# Аргумент для указания, какой JAR файл копировать (можно поменять, если у тебя другой путь/имя)
-ARG JAR_FILE=target/*.jar
+WORKDIR /app
 
-# Копируем собранный jar из target в контейнер с именем app.jar
-COPY ${JAR_FILE} app.jar
+# Копируем собранный JAR из первого этапа в текущий
+COPY --from=build /app/target/*.jar app.jar
 
-# Команда запуска контейнера — стартуем Spring Boot приложение
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Запускаем приложение
+ENTRYPOINT ["java", "-jar", "app.jar"]
