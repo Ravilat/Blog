@@ -13,9 +13,11 @@ import org.blog.repository.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Transactional
 @Service
 public class UserService {
 
@@ -32,7 +34,7 @@ public class UserService {
         this.postRepository = postRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
+    @Transactional(readOnly = true)
     public UserProfileDto findByLoginDto(String requestedLogin, String currentLogin) {
 
         User user = userRepository.findByLogin(requestedLogin)
@@ -55,6 +57,7 @@ public class UserService {
         return userProfileDto;
     }
 
+    @Transactional(readOnly = true)
     public UserProfileDto findUserProfileDtoById(Integer id, String currentLogin) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -74,6 +77,7 @@ public class UserService {
         );
     }
 
+    @Transactional(readOnly = true)
     public UserDto findById(Integer id) {
         Optional<User> optionalUser = userRepository.findById(id);
         return userMapper.toUserDto(optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found")));

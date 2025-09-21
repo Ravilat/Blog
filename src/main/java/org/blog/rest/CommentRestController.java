@@ -1,4 +1,4 @@
-package org.blog.rest_controller;
+package org.blog.rest;
 
 import org.blog.DTO.CommentCreateDto;
 import org.blog.DTO.CommentResponseDTO;

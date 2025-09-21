@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+//обработчик ошибок - при ошибке регистрации перенесет на страницу регистрации с пустыми полями, чтобы не искать
 @ControllerAdvice
 public class RegistrationExceptionHandler {
 

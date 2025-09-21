@@ -35,25 +35,15 @@ public class PostController {
 
     @GetMapping("/{id}")
     public String getPost(@PathVariable("id") Integer id, Model model, Authentication auth) {
-        PostResponceWithCommentsDto post = postService.getResponsePostWithCommentsById(id);
 
-        List<CommentResponseDTO> comments = post.comments();
-        List<CommentResponseDTO> sortedCommentsByDate = comments
-                .stream()
-                .sorted(Comparator.comparing(CommentResponseDTO::createDate))
-                .toList();
-
-        PostResponceWithCommentsDto postWithSortedComments = new PostResponceWithCommentsDto(
-                post.id(), post.title(), post.content(), post.author(), sortedCommentsByDate, post.createDate(), post.updateDate());
-
+        PostResponceWithCommentsDto postWithSortedComments = postService.getResponsePostWithSortedCommentsById(id);
         model.addAttribute("post", postWithSortedComments);
         boolean isOwner = false;
         if (auth != null && auth.isAuthenticated()) {
-            isOwner = post.author().equals(auth.getName());
+            isOwner = postWithSortedComments.author().equals(auth.getName());
             model.addAttribute("username", auth.getName());
         }
         model.addAttribute("isPostOwner", isOwner);
-
         return "post";
     }
 

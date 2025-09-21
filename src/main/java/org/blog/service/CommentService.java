@@ -13,9 +13,11 @@ import org.blog.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Service
 public class CommentService {
 
@@ -30,7 +32,7 @@ public class CommentService {
         this.commentMapper = commentMapper;
         this.userRepository = userRepository;
     }
-
+    @Transactional(readOnly = true)
     public List<CommentResponseDTO> getCommentsFromPost(PostResponseDto postResponseDto) {
         return commentRepository.findCommentsByPost(postResponseDto.id())
                 .stream()

@@ -1,4 +1,4 @@
-package org.blog.rest_controller;
+package org.blog.rest;
 
 import org.blog.DTO.UserCreateDto;
 import org.blog.DTO.UserDto;
@@ -18,7 +18,7 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<UserDto> getRestUser(@PathVariable("id") Integer id) {
         UserDto userDto = userService.findById(id);
         return ResponseEntity.ok(userDto);
@@ -30,7 +30,7 @@ public class UserRestController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/{login}")
+    @GetMapping("/login/{login}")
     public ResponseEntity<UserProfileDto> getRestUserByLogin(@PathVariable("login") String login, Authentication auth) {
 
         String currentUser = auth.getName();

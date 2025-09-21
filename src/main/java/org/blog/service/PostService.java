@@ -1,5 +1,6 @@
 package org.blog.service;
 
+import org.blog.DTO.CommentResponseDTO;
 import org.blog.DTO.PostCreateDto;
 import org.blog.DTO.PostResponceWithCommentsDto;
 import org.blog.DTO.PostResponseDto;
@@ -9,14 +10,17 @@ import org.blog.exceptions.PostNotFoundException;
 import org.blog.mapper.PostMapper;
 import org.blog.repository.PostRepository;
 import org.blog.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 @Service
 public class PostService {
 
@@ -38,10 +42,22 @@ public class PostService {
                 .map(postMapper::toResponseDto)
                 .toList();
     }
-
+    @Transactional(readOnly = true)
     public PostResponceWithCommentsDto getResponsePostWithCommentsById(Integer id) {
         Optional<Post> optionalPost = postRepository.findById(id);
-        return optionalPost.map(postMapper::toResponseWithCommentsDto).orElse(null);
+        return optionalPost.map(postMapper::toResponseWithCommentsDto).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found"));
+    }
+    @Transactional(readOnly = true)
+    public PostResponceWithCommentsDto getResponsePostWithSortedCommentsById(Integer id) {
+        PostResponceWithCommentsDto post = getResponsePostWithCommentsById(id);
+        List<CommentResponseDTO> comments = post.comments();
+        List<CommentResponseDTO> sortedCommentsByDate = comments
+                .stream()
+                .sorted(Comparator.comparing(CommentResponseDTO::createDate))
+                .toList();
+        PostResponceWithCommentsDto postWithSortedComments = new PostResponceWithCommentsDto(
+                post.id(), post.title(), post.content(), post.author(), sortedCommentsByDate, post.createDate(), post.updateDate());
+        return postWithSortedComments;
     }
 
 

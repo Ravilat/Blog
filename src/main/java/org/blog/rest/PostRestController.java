@@ -1,11 +1,9 @@
-package org.blog.rest_controller;
+package org.blog.rest;
 
-import org.blog.DTO.PostCreateDto;
 import org.blog.DTO.PostResponceWithCommentsDto;
 import org.blog.DTO.PostResponseDto;
 import org.blog.service.PostService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

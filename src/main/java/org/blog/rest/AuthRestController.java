@@ -1,4 +1,4 @@
-package org.blog.rest_controller;
+package org.blog.rest;
 
 import org.blog.DTO.AuthDto;
 import org.springframework.http.HttpStatus;

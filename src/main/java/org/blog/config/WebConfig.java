@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-//конфигурация для подключения "внешнего" фронта с порта 3000
+//конфигурация для подключения "внешнего" фронта с порта 3000 (правила CORS)
 @Configuration
 public class WebConfig {
 //    @Bean
