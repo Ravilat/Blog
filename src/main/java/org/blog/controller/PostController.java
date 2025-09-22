@@ -1,6 +1,5 @@
 package org.blog.controller;
 
-import org.blog.DTO.CommentResponseDTO;
 import org.blog.DTO.PostCreateDto;
 import org.blog.DTO.PostResponceWithCommentsDto;
 import org.blog.DTO.PostResponseDto;
@@ -9,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.Comparator;
+
 import java.util.List;
 
 @Controller

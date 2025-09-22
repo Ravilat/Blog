@@ -2,7 +2,6 @@ package org.blog.mapper;
 
 import org.blog.DTO.UserDto;
 import org.blog.DTO.UserLoginDTO;
-import org.blog.DTO.UserProfileDto;
 import org.blog.entity.User;
 import org.mapstruct.Mapper;
 

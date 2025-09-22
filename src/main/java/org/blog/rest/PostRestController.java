@@ -29,11 +29,5 @@ public class PostRestController {
         return ResponseEntity.ok(post);
     }
 
-//    @PostMapping
-//    public ResponseEntity<PostResponseDto> createRestPost(@RequestBody PostCreateDto dto, Authentication auth) {
-//        PostResponseDto post = postService.createPost(dto, auth);
-//        return ResponseEntity.ok(post);
-//    }
-
 }
 

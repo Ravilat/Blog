@@ -1,32 +1,9 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Добавить комментарий</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:replace="~{fragments/header :: body}"></div>-->
-
-<!--<h1>Добавить комментарий</h1>-->
-
-<!--<form th:action="@{/posts/{id}/comment(id=${postId})}" th:object="${comment}" method="post">-->
-<!--    <label>Комментарий:</label><br>-->
-<!--    <textarea th:field="*{content}" rows="5" cols="40"></textarea><br><br>-->
-
-<!--    <button type="submit">Отправить</button>-->
-<!--</form>-->
-
-<!--<a th:href="@{/posts/{id}(id=${postId})}">← Назад к посту</a>-->
-
-<!--</body>-->
-<!--</html>-->
-
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Добавить комментарий</title>
     <meta charset="UTF-8" />
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -51,7 +28,6 @@
     <a th:href="@{/posts/{id}(id=${postId})}" class="d-block mt-4">← Назад к посту</a>
 </main>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>

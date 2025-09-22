@@ -1,98 +1,9 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">-->
-<!--<head>-->
-<!--    <title th:text="${post.title}">Пост</title>-->
-<!--    <script>-->
-<!--        function showEditForm() {-->
-<!--            document.getElementById('change-post-form').style.display = 'block';-->
-<!--            document.getElementById('change-post-button').style.display = 'none';-->
-<!--        }-->
-<!--    </script>-->
-
-<!--    <script>-->
-<!--        function showEditCommentForm() {-->
-<!--            document.getElementById('change-comment-form').style.display = 'block';-->
-<!--            document.getElementById('change-comment-button').style.display = 'none';-->
-<!--        }-->
-<!--    </script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:replace="~{fragments/header :: body}"></div>-->
-
-<!--<h1 th:text="${post.title}">Заголовок</h1>-->
-<!--<p th:text="${post.content}">Содержимое поста</p>-->
-
-
-<!--<p> Автор: <a th:href="@{/user/{userName}(userName=${post.author})}" th:text="${post.author}">user</a></p>-->
-<!--<p>-->
-<!--    Дата:-->
-<!--    <span th:text="${post.updateDate.format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy HH:mm'))}">Дата</span>-->
-<!--</p>-->
-
-<!--<span th:if="${isPostOwner}">-->
-<!--        <p>-->
-<!--            <button type="button" id="change-post-button" onclick="showEditForm()">Редактировать пост</button>-->
-<!--        </p>-->
-
-<!--        <form th:action="@{/posts/{id}/change(id=${post.id})}" method="post" id="change-post-form"-->
-<!--              style="display: none;">-->
-<!--            <textarea name="newContent" required th:text="${post.content}"></textarea>-->
-<!--            <button type="submit">Сохранить</button>-->
-<!--        </form>-->
-
-<!--    </span>-->
-
-<!--<hr>-->
-
-<!--<h2>Комментарии</h2>-->
-
-<!--<div th:if="${post.comments.empty}">-->
-<!--    <p>Комментариев пока нет</p>-->
-<!--</div>-->
-
-<!--<ul th:each="comment : ${post.comments}">-->
-<!--    <li>-->
-<!--        <p th:text="${comment.content}">Текст комментария</p>-->
-<!--        <small>-->
-<!--            Автор: <span><a th:href="@{/user/{userName}(userName=${comment.author})}"-->
-<!--                            th:text="${comment.author}">user</a></span> —-->
-<!--            <span th:text="${comment.updateDate.format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy HH:mm'))}">Дата</span>-->
-
-<!--            <div th:if="${username} == ${comment.author}"-->
-
-<!--                <p>-->
-<!--                    <button type="button" id="change-comment-button"-->
-<!--                            onclick="showEditCommentForm()">Редактировать комментарий</button>-->
-<!--                </p>-->
-
-<!--                <form th:action="@{/posts/{postId}/comment/edit/{commentId}(postId=${post.id}, commentId = ${comment.id()})}"-->
-<!--                      method="post" id="change-comment-form" style="display: none;">-->
-<!--                    <textarea name="newCommentContent" required th:text="${comment.content}"></textarea>-->
-<!--                    <button type="submit">Сохранить</button>-->
-<!--                </form>-->
-
-<!--            </div>-->
-
-<!--        </small>-->
-<!--    </li>-->
-<!--</ul>-->
-
-<!--<div th:if="${#authorization.expression('isAuthenticated()')}">-->
-<!--    <a th:href="@{/posts/{id}/comments/new(id=${post.id})}">Создать комментарий</a>-->
-<!--</div>-->
-
-<!--<br>-->
-<!--<a href="/posts">← Назад к постам</a>-->
-
-<!--</body>-->
-<!--</html>-->
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title th:text="${post.title}">Пост</title>
     <meta charset="UTF-8" />
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <script>
@@ -179,7 +90,6 @@
 
 </main>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
